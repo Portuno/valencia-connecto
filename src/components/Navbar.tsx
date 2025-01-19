@@ -12,7 +12,7 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-valencia-orange">Valencia Connect</span>
+            <span className="text-2xl font-bold text-valencia-orange">Terreta Hub</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -33,7 +33,6 @@ export function Navbar() {
             >
               {language === "en" ? "ES" : "EN"}
             </Button>
-            <Button variant="ghost">{t("nav.login")}</Button>
             <Button className="bg-valencia-orange hover:bg-valencia-terracotta text-white">
               {t("nav.signup")}
             </Button>
@@ -66,9 +65,6 @@ export function Navbar() {
                 className="justify-start"
               >
                 {language === "en" ? "Español" : "English"}
-              </Button>
-              <Button variant="ghost" className="justify-start">
-                {t("nav.login")}
               </Button>
               <Button className="bg-valencia-orange hover:bg-valencia-terracotta text-white w-full">
                 {t("nav.signup")}

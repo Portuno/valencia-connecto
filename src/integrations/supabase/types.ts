@@ -9,6 +9,72 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      newsletter_subscriptions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      pre_registrations: {
+        Row: {
+          about: string | null
+          age: number
+          contact_method: Database["public"]["Enums"]["contact_method"]
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          interests: string[]
+          languages: string[]
+          last_name: string
+          nationality: string
+          other_contact_details: string | null
+          other_interests: string | null
+        }
+        Insert: {
+          about?: string | null
+          age: number
+          contact_method?: Database["public"]["Enums"]["contact_method"]
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          interests?: string[]
+          languages?: string[]
+          last_name: string
+          nationality: string
+          other_contact_details?: string | null
+          other_interests?: string | null
+        }
+        Update: {
+          about?: string | null
+          age?: number
+          contact_method?: Database["public"]["Enums"]["contact_method"]
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          interests?: string[]
+          languages?: string[]
+          last_name?: string
+          nationality?: string
+          other_contact_details?: string | null
+          other_interests?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           about: string | null

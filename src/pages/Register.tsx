@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import { RegistrationForm } from "@/components/RegistrationForm";
+import { PreRegistrationForm } from "@/components/pre-registration/PreRegistrationForm";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const Register = () => {
@@ -8,7 +8,7 @@ const Register = () => {
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <div className="pt-20 pb-16">
-          <RegistrationForm />
+          <PreRegistrationForm />
         </div>
       </div>
     </LanguageProvider>

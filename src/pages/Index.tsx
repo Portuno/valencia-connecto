@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
+import { NewsletterForm } from "@/components/NewsletterForm";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const Index = () => {
@@ -8,6 +9,7 @@ const Index = () => {
       <div className="min-h-screen">
         <Navbar />
         <Hero />
+        <NewsletterForm />
       </div>
     </LanguageProvider>
   );

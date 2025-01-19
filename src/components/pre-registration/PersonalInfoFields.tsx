@@ -12,7 +12,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <FormField
         control={form.control}
-        name="firstName"
+        name="first_name"
         render={({ field }) => (
           <FormItem>
             <FormLabel>First Name / Nombre</FormLabel>
@@ -25,7 +25,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
       />
       <FormField
         control={form.control}
-        name="lastName"
+        name="last_name"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Last Name / Apellido</FormLabel>

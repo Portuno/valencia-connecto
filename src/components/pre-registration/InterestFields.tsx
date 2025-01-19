@@ -56,7 +56,7 @@ export function InterestFields({ form }: InterestFieldsProps) {
       />
       <FormField
         control={form.control}
-        name="otherInterests"
+        name="other_interests"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Other Interests / Otros Intereses</FormLabel>

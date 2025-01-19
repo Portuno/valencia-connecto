@@ -13,7 +13,7 @@ export function ContactFields({ form }: ContactFieldsProps) {
     <>
       <FormField
         control={form.control}
-        name="contactMethod"
+        name="contact_method"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Preferred Contact Method / Método de Contacto Preferido</FormLabel>
@@ -55,7 +55,7 @@ export function ContactFields({ form }: ContactFieldsProps) {
       />
       <FormField
         control={form.control}
-        name="otherContactDetails"
+        name="other_contact_details"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Other Contact Details / Otros Detalles de Contacto</FormLabel>

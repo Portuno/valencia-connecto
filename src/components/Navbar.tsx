@@ -2,28 +2,47 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
   const { t, language, setLanguage } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-valencia-orange">Terreta Hub</span>
+            <span 
+              onClick={() => navigate('/')} 
+              className="text-2xl font-bold text-valencia-orange cursor-pointer"
+            >
+              Terreta Hub
+            </span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-600 hover:text-valencia-orange transition-colors">
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigate('/'); }} 
+              className="text-gray-600 hover:text-valencia-orange transition-colors"
+            >
               {t("nav.home")}
             </a>
-            <a href="#" className="text-gray-600 hover:text-valencia-orange transition-colors">
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigate('/events'); }}
+              className="text-gray-600 hover:text-valencia-orange transition-colors"
+            >
               {t("nav.events")}
             </a>
-            <a href="#" className="text-gray-600 hover:text-valencia-orange transition-colors">
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigate('/groups'); }}
+              className="text-gray-600 hover:text-valencia-orange transition-colors"
+            >
               {t("nav.groups")}
             </a>
             <Button
@@ -33,7 +52,10 @@ export function Navbar() {
             >
               {language === "en" ? "ES" : "EN"}
             </Button>
-            <Button className="bg-valencia-orange hover:bg-valencia-terracotta text-white">
+            <Button 
+              onClick={() => navigate('/register')}
+              className="bg-valencia-orange hover:bg-valencia-terracotta text-white"
+            >
               {t("nav.signup")}
             </Button>
           </div>
@@ -50,13 +72,25 @@ export function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-4">
-              <a href="#" className="text-gray-600 hover:text-valencia-orange transition-colors">
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); navigate('/'); setIsMenuOpen(false); }}
+                className="text-gray-600 hover:text-valencia-orange transition-colors"
+              >
                 {t("nav.home")}
               </a>
-              <a href="#" className="text-gray-600 hover:text-valencia-orange transition-colors">
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); navigate('/events'); setIsMenuOpen(false); }}
+                className="text-gray-600 hover:text-valencia-orange transition-colors"
+              >
                 {t("nav.events")}
               </a>
-              <a href="#" className="text-gray-600 hover:text-valencia-orange transition-colors">
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); navigate('/groups'); setIsMenuOpen(false); }}
+                className="text-gray-600 hover:text-valencia-orange transition-colors"
+              >
                 {t("nav.groups")}
               </a>
               <Button
@@ -66,7 +100,10 @@ export function Navbar() {
               >
                 {language === "en" ? "Español" : "English"}
               </Button>
-              <Button className="bg-valencia-orange hover:bg-valencia-terracotta text-white w-full">
+              <Button 
+                onClick={() => { navigate('/register'); setIsMenuOpen(false); }}
+                className="bg-valencia-orange hover:bg-valencia-terracotta text-white w-full"
+              >
                 {t("nav.signup")}
               </Button>
             </div>

@@ -15,16 +15,16 @@ import { ContactFields } from "./ContactFields";
 import { PreRegistrationFormData } from "./types";
 
 const formSchema = z.object({
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  first_name: z.string().min(2, "First name must be at least 2 characters"),
+  last_name: z.string().min(2, "Last name must be at least 2 characters"),
   age: z.number().min(18, "Must be at least 18 years old"),
   nationality: z.string().min(2, "Please enter your nationality"),
   languages: z.array(z.string()).min(1, "Select at least one language"),
   interests: z.array(z.string()).min(1, "Select at least one interest"),
-  otherInterests: z.string().optional(),
+  other_interests: z.string().optional(),
   about: z.string().min(10, "Tell us a bit more about yourself"),
-  contactMethod: z.enum(["email", "whatsapp", "telegram", "other"]),
-  otherContactDetails: z.string().optional(),
+  contact_method: z.enum(["email", "whatsapp", "telegram", "other"]),
+  other_contact_details: z.string().optional(),
   email: z.string().email("Invalid email address"),
 });
 
@@ -37,13 +37,14 @@ export function PreRegistrationForm() {
     defaultValues: {
       languages: [],
       interests: [],
-      contactMethod: "email",
+      contact_method: "email",
     },
   });
 
   const onSubmit = async (values: PreRegistrationFormData) => {
     try {
-      const { error } = await supabase.from("pre_registrations").insert([values]);
+      console.log("Submitting pre-registration form with values:", values);
+      const { error } = await supabase.from("pre_registrations").insert(values);
 
       if (error) throw error;
 

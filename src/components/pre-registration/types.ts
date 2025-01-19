@@ -1,13 +1,13 @@
 export interface PreRegistrationFormData {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   age: number;
   nationality: string;
   languages: string[];
   interests: string[];
-  otherInterests?: string;
+  other_interests?: string;
   about?: string;
-  contactMethod: "email" | "whatsapp" | "telegram" | "other";
-  otherContactDetails?: string;
+  contact_method: "email" | "whatsapp" | "telegram" | "other";
+  other_contact_details?: string;
   email: string;
 }

@@ -41,15 +41,24 @@ export function RegistrationForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const { error: signUpError } = await supabase.auth.signUp({
+      // First, sign up the user
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
         email: values.email,
         password: values.password,
       });
 
       if (signUpError) throw signUpError;
+      
+      // Make sure we have a user ID
+      if (!authData.user?.id) {
+        throw new Error("No user ID returned from signup");
+      }
 
+      console.log("User signed up successfully, creating profile...");
+
+      // Then create their profile
       const { error: profileError } = await supabase.from("profiles").upsert({
-        id: (await supabase.auth.getUser()).data.user?.id,
+        id: authData.user.id,
         first_name: values.firstName,
         last_name: values.lastName,
         age: values.age,
@@ -62,7 +71,10 @@ export function RegistrationForm() {
         other_contact_details: values.otherContactDetails,
       });
 
-      if (profileError) throw profileError;
+      if (profileError) {
+        console.error("Profile creation error:", profileError);
+        throw profileError;
+      }
 
       toast.success("Registration successful! Please check your email to verify your account.");
       navigate("/");

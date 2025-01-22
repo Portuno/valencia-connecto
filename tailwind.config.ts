@@ -19,12 +19,15 @@ export default {
     },
     extend: {
       colors: {
+        // New color palette
         valencia: {
-          orange: "#FF6B35",
-          blue: "#4CB2D4",
-          terracotta: "#D4725C",
-          sage: "#8AAB92",
+          sage: "#A0A672",     // Sage green
+          cream: "#F2F0D8",    // Light cream
+          orange: "#F28D35",   // Bright orange
+          terracotta: "#BF5630", // Terracotta
+          brown: "#592F25",    // Deep brown
         },
+        // Keep existing system colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

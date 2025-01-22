@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Register from "./pages/Register";
 import Events from "./pages/Events";
 import Groups from "./pages/Groups";
+import Projects from "./pages/Projects";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/events" element={<Events />} />
           <Route path="/groups" element={<Groups />} />
+          <Route path="/projects" element={<Projects />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

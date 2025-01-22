@@ -45,6 +45,13 @@ export function Navbar() {
             >
               {t("nav.groups")}
             </a>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigate('/projects'); }}
+              className="text-gray-600 hover:text-valencia-orange transition-colors"
+            >
+              Projects
+            </a>
             <Button
               variant="ghost"
               onClick={() => setLanguage(language === "en" ? "es" : "en")}
@@ -92,6 +99,13 @@ export function Navbar() {
                 className="text-gray-600 hover:text-valencia-orange transition-colors"
               >
                 {t("nav.groups")}
+              </a>
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); navigate('/projects'); setIsMenuOpen(false); }}
+                className="text-gray-600 hover:text-valencia-orange transition-colors"
+              >
+                Projects
               </a>
               <Button
                 variant="ghost"

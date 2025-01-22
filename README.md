@@ -1,69 +1,95 @@
-# Welcome to your Lovable project
+# Terreta Hub - Valencia's International Community Platform
 
-## Project info
+## About
 
-**URL**: https://lovable.dev/projects/30903293-a79c-41b3-872f-55bf29a18538
+Terreta Hub is a community platform designed to connect international residents, digital nomads, and locals in Valencia, Spain. Our mission is to foster meaningful connections, facilitate knowledge sharing, and build a vibrant community that enriches the experience of living in Valencia.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+### 🤝 Community Building
+- Connect with fellow internationals and locals
+- Share experiences and knowledge
+- Build lasting friendships and professional networks
 
-**Use Lovable**
+### 📅 Events
+- Discover local meetups and gatherings
+- Join cultural exchange activities
+- Participate in professional networking events
+- Find language exchange opportunities
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/30903293-a79c-41b3-872f-55bf29a18538) and start prompting.
+### 👥 Interest Groups
+- Join groups based on shared interests
+- Create new groups for specific activities or topics
+- Collaborate on community projects
+- Share resources and recommendations
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🚀 Projects
+- Showcase community-driven initiatives
+- Collaborate on local projects
+- Support entrepreneurial ventures
+- Connect with potential collaborators
 
-**Use your preferred IDE**
+## Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+This project is built with modern web technologies:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Frontend**: React + TypeScript
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Backend**: Supabase
+- **Build Tool**: Vite
 
-Follow these steps:
+## Getting Started
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn package manager
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Local Development
+```bash
+# Clone the repository
+git clone [your-repo-url]
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Environment Variables
+Create a `.env` file in the root directory with:
+```
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Contributing
 
-**Use GitHub Codespaces**
+We welcome contributions from the community! Whether it's:
+- 🐛 Bug fixes
+- ✨ New features
+- 📚 Documentation improvements
+- 🎨 UI/UX enhancements
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Please read our contributing guidelines before submitting pull requests.
 
-## What technologies are used for this project?
+## Community Guidelines
 
-This project is built with .
+1. **Be Respectful**: Treat all community members with respect and kindness
+2. **Stay Inclusive**: Welcome people from all backgrounds and cultures
+3. **Share Knowledge**: Help others and contribute to the community's growth
+4. **Stay Positive**: Maintain a constructive and supportive atmosphere
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Contact
 
-## How can I deploy this project?
+- Website: [Your Website URL]
+- Email: [Contact Email]
+- Discord: [Discord Invite Link]
 
-Simply open [Lovable](https://lovable.dev/projects/30903293-a79c-41b3-872f-55bf29a18538) and click on Share -> Publish.
+## License
 
-## I want to use a custom domain - is that possible?
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+---
+
+Built with ❤️ for the Valencia international community

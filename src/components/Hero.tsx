@@ -7,13 +7,13 @@ export function Hero() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-valencia-blue/10 to-valencia-orange/10 pt-16">
-      <div className="container mx-auto px-4 py-16">
+    <div className="flex items-center justify-center bg-gradient-to-br from-valencia-cream/30 to-valencia-sage/20 pt-16 pb-24">
+      <div className="container mx-auto px-4">
         <div className="text-center space-y-8 animate-fadeIn">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold text-valencia-brown leading-tight">
             {t("hero.title")}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-valencia-brown/80 max-w-3xl mx-auto">
             {t("hero.subtitle")}
           </p>
           <div className="pt-4">

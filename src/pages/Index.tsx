@@ -6,10 +6,14 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 const Index = () => {
   return (
     <LanguageProvider>
-      <div className="min-h-screen">
+      <div className="min-h-screen flex flex-col">
         <Navbar />
-        <Hero />
-        <NewsletterForm />
+        <div className="flex-1 grid grid-rows-[auto,auto] gap-8">
+          <Hero />
+          <div className="container mx-auto px-4 -mt-16">
+            <NewsletterForm />
+          </div>
+        </div>
       </div>
     </LanguageProvider>
   );

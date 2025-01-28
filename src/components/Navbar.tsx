@@ -40,10 +40,10 @@ export function Navbar() {
             </a>
             <a 
               href="#" 
-              onClick={(e) => { e.preventDefault(); navigate('/groups'); }}
+              onClick={(e) => { e.preventDefault(); navigate('/feedback'); }}
               className="text-gray-600 hover:text-valencia-orange transition-colors"
             >
-              {t("nav.groups")}
+              {t("nav.feedback")}
             </a>
             <a 
               href="#" 
@@ -95,10 +95,10 @@ export function Navbar() {
               </a>
               <a 
                 href="#" 
-                onClick={(e) => { e.preventDefault(); navigate('/groups'); setIsMenuOpen(false); }}
+                onClick={(e) => { e.preventDefault(); navigate('/feedback'); setIsMenuOpen(false); }}
                 className="text-gray-600 hover:text-valencia-orange transition-colors"
               >
-                {t("nav.groups")}
+                {t("nav.feedback")}
               </a>
               <a 
                 href="#" 

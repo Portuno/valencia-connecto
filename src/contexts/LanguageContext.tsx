@@ -24,6 +24,10 @@ const translations = {
     "feedback.submit": "Submit Feedback",
     "feedback.placeholder": "Tell us what you think about Terreta Hub...",
     "feedback.success": "Thank you for your feedback!",
+    "resources.title": "Resources",
+    "resources.blogs": "Blogs",
+    "resources.guides": "Guides",
+    "resources.courses": "Courses",
   },
   es: {
     "nav.home": "Inicio",
@@ -40,6 +44,10 @@ const translations = {
     "feedback.submit": "Enviar Opinión",
     "feedback.placeholder": "Cuéntanos qué piensas sobre Terreta Hub...",
     "feedback.success": "¡Gracias por tu opinión!",
+    "resources.title": "Recursos",
+    "resources.blogs": "Blogs",
+    "resources.guides": "Guías",
+    "resources.courses": "Cursos",
   },
 };
 

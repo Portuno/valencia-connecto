@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Events from "./pages/Events";
 import Feedback from "./pages/Feedback";
 import Projects from "./pages/Projects";
+import Resources from "./pages/Resources";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/events" element={<Events />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/resources" element={<Resources />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

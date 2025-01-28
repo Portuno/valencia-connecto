@@ -52,6 +52,13 @@ export function Navbar() {
             >
               Projects
             </a>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigate('/resources'); }}
+              className="text-gray-600 hover:text-valencia-orange transition-colors"
+            >
+              Resources
+            </a>
             <Button
               variant="ghost"
               onClick={() => setLanguage(language === "en" ? "es" : "en")}
@@ -106,6 +113,13 @@ export function Navbar() {
                 className="text-gray-600 hover:text-valencia-orange transition-colors"
               >
                 Projects
+              </a>
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); navigate('/resources'); setIsMenuOpen(false); }}
+                className="text-gray-600 hover:text-valencia-orange transition-colors"
+              >
+                Resources
               </a>
               <Button
                 variant="ghost"

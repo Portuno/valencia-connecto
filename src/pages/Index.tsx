@@ -1,6 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { Footer } from "@/components/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
             <NewsletterForm />
           </div>
         </div>
+        <Footer />
       </div>
     </LanguageProvider>
   );

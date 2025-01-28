@@ -7,6 +7,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Register from "./pages/Register";
 import Events from "./pages/Events";
+import PreviousEvents from "./pages/events/PreviousEvents";
+import UpcomingEvents from "./pages/events/UpcomingEvents";
 import Feedback from "./pages/Feedback";
 import Projects from "./pages/Projects";
 import Resources from "./pages/Resources";
@@ -31,6 +33,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/register" element={<Register />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/events/previous" element={<PreviousEvents />} />
+            <Route path="/events/upcoming" element={<UpcomingEvents />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/resources" element={<Resources />} />

@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Building, Gavel, Chip, BookOpen, Heart, UtensilsCrossed } from "lucide-react";
+import { Building, Gavel, Code, BookOpen, Heart, UtensilsCrossed } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Verticals() {
@@ -15,7 +15,7 @@ export default function Verticals() {
     {
       title: "Tech",
       description: "Technology innovation and digital transformation",
-      icon: Chip,
+      icon: Code,
       path: "/verticals/tech",
       color: "text-valencia-orange",
     },

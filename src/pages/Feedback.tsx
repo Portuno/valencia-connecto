@@ -3,25 +3,40 @@ import { Navbar } from "@/components/Navbar";
 import { useLanguage, LanguageProvider } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { MessageSquare } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const FeedbackContent = () => {
   const { t } = useLanguage();
-  const { toast } = useToast();
   const [feedback, setFeedback] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the feedback to your backend
-    console.log("Feedback submitted:", feedback);
     
-    toast({
-      title: t("feedback.success"),
-      description: new Date().toLocaleDateString(),
-    });
+    if (!feedback.trim()) {
+      toast.error("Please enter your feedback");
+      return;
+    }
+
+    setIsSubmitting(true);
     
-    setFeedback("");
+    try {
+      const { error } = await supabase
+        .from("feedback")
+        .insert([{ message: feedback.trim() }]);
+
+      if (error) throw error;
+
+      toast.success(t("feedback.success"));
+      setFeedback("");
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      toast.error("Failed to submit feedback. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -43,9 +58,10 @@ const FeedbackContent = () => {
           />
           <Button 
             type="submit"
+            disabled={isSubmitting}
             className="w-full bg-valencia-orange hover:bg-valencia-terracotta text-white"
           >
-            {t("feedback.submit")}
+            {isSubmitting ? "Submitting..." : t("feedback.submit")}
           </Button>
         </form>
       </div>

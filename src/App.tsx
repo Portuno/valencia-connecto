@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Register from "./pages/Register";
 import Events from "./pages/Events";
-import Groups from "./pages/Groups";
+import Feedback from "./pages/Feedback";
 import Projects from "./pages/Projects";
 
 const queryClient = new QueryClient();
@@ -21,7 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/register" element={<Register />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/groups" element={<Groups />} />
+          <Route path="/feedback" element={<Feedback />} />
           <Route path="/projects" element={<Projects />} />
         </Routes>
       </BrowserRouter>

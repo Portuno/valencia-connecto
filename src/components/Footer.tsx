@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
@@ -20,49 +23,54 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors">
-                  Home
+                  {t("nav.home")}
                 </Link>
               </li>
               <li>
                 <Link to="/events" className="text-gray-400 hover:text-white transition-colors">
-                  Events
+                  {t("nav.events")}
                 </Link>
               </li>
               <li>
-                <Link to="/projects" className="text-gray-400 hover:text-white transition-colors">
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link to="/resources" className="text-gray-400 hover:text-white transition-colors">
-                  Resources
+                <Link to="/feedback" className="text-gray-400 hover:text-white transition-colors">
+                  {t("nav.feedback")}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Verticals */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold">Resources</h3>
+            <h3 className="text-xl font-bold">{t("verticals.title")}</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/verticals/tech" className="text-gray-400 hover:text-white transition-colors">
-                  Tech
+                  {t("verticals.technology")}
                 </Link>
               </li>
               <li>
-                <Link to="/verticals/business" className="text-gray-400 hover:text-white transition-colors">
-                  Business
+                <Link to="/verticals/finance" className="text-gray-400 hover:text-white transition-colors">
+                  {t("verticals.finance")}
                 </Link>
               </li>
               <li>
-                <Link to="/verticals/education" className="text-gray-400 hover:text-white transition-colors">
-                  Education
+                <Link to="/verticals/law" className="text-gray-400 hover:text-white transition-colors">
+                  {t("verticals.law")}
                 </Link>
               </li>
               <li>
                 <Link to="/verticals/health" className="text-gray-400 hover:text-white transition-colors">
-                  Health
+                  {t("verticals.health")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/verticals/art" className="text-gray-400 hover:text-white transition-colors">
+                  {t("verticals.art")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/verticals/community" className="text-gray-400 hover:text-white transition-colors">
+                  {t("verticals.community")}
                 </Link>
               </li>
             </ul>

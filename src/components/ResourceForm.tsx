@@ -54,11 +54,21 @@ export function ResourceForm({ resource, onSuccess }: ResourceFormProps) {
       if (resource) {
         const { error } = await supabase
           .from("resources")
-          .update(values)
+          .update({
+            title: values.title,
+            content: values.content,
+            type: values.type,
+          })
           .eq("id", resource.id);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("resources").insert([values]);
+        const { error } = await supabase
+          .from("resources")
+          .insert([{
+            title: values.title,
+            content: values.content,
+            type: values.type,
+          }]);
         if (error) throw error;
       }
       onSuccess();

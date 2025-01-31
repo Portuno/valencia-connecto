@@ -7,16 +7,22 @@ import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ResourceForm } from "@/components/ResourceForm";
 
 const Resources = () => {
   const [isEditing, setIsEditing] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<string>("blogs");
+  const [userId, setUserId] = useState<string | null>(null);
 
-  const { data: session } = await supabase.auth.getSession();
-  const userId = session?.session?.user?.id;
+  useEffect(() => {
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUserId(session?.user?.id || null);
+    };
+    getSession();
+  }, []);
 
   const { data: userRole } = useQuery({
     queryKey: ['userRole', userId],

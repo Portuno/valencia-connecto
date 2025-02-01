@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -7,21 +8,33 @@ import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ResourceForm } from "@/components/ResourceForm";
 
-const Resources = () => {
+const Resources: React.FC = () => {
   const [isEditing, setIsEditing] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<string>("blogs");
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUserId(session?.user?.id || null);
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setUserId(session?.user?.id || null);
+      } catch (error) {
+        console.error("Error fetching session:", error);
+        setUserId(null);
+      }
     };
+
     getSession();
+
+    // Subscribe to auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserId(session?.user?.id || null);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const { data: userRole } = useQuery({
@@ -55,18 +68,23 @@ const Resources = () => {
   });
 
   const handleDelete = async (id: string) => {
-    const { error } = await supabase
-      .from('resources')
-      .delete()
-      .eq('id', id);
+    try {
+      const { error } = await supabase
+        .from('resources')
+        .delete()
+        .eq('id', id);
 
-    if (error) {
-      toast.error("Failed to delete resource");
-      return;
+      if (error) {
+        toast.error("Failed to delete resource");
+        return;
+      }
+
+      toast.success("Resource deleted successfully");
+      refetch();
+    } catch (error) {
+      console.error("Error deleting resource:", error);
+      toast.error("An error occurred while deleting the resource");
     }
-
-    toast.success("Resource deleted successfully");
-    refetch();
   };
 
   return (

@@ -126,6 +126,48 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          about: string | null
+          age: number
+          contact_method: Database["public"]["Enums"]["contact_method"] | null
+          first_name: string
+          id: string
+          interests: string[] | null
+          languages: string[] | null
+          last_name: string
+          nationality: string
+          other_contact_details: string | null
+          other_interests: string | null
+        }
+        Insert: {
+          about?: string | null
+          age: number
+          contact_method?: Database["public"]["Enums"]["contact_method"] | null
+          first_name: string
+          id: string
+          interests?: string[] | null
+          languages?: string[] | null
+          last_name: string
+          nationality: string
+          other_contact_details?: string | null
+          other_interests?: string | null
+        }
+        Update: {
+          about?: string | null
+          age?: number
+          contact_method?: Database["public"]["Enums"]["contact_method"] | null
+          first_name?: string
+          id?: string
+          interests?: string[] | null
+          languages?: string[] | null
+          last_name?: string
+          nationality?: string
+          other_contact_details?: string | null
+          other_interests?: string | null
+        }
+        Relationships: []
+      }
       projects: {
         Row: {
           created_at: string

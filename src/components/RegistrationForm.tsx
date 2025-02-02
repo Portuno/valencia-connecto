@@ -57,19 +57,21 @@ export function RegistrationForm() {
       console.log("User signed up successfully, creating profile...");
 
       // Then create their profile
-      const { error: profileError } = await supabase.from("profiles").upsert({
-        id: authData.user.id,
-        first_name: values.firstName,
-        last_name: values.lastName,
-        age: values.age,
-        nationality: values.nationality,
-        languages: values.languages,
-        interests: values.interests,
-        other_interests: values.otherInterests,
-        about: values.about,
-        contact_method: values.contactMethod,
-        other_contact_details: values.otherContactDetails,
-      });
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .upsert({
+          id: authData.user.id,
+          first_name: values.firstName,
+          last_name: values.lastName,
+          age: values.age,
+          nationality: values.nationality,
+          languages: values.languages,
+          interests: values.interests,
+          other_interests: values.otherInterests,
+          about: values.about,
+          contact_method: values.contactMethod,
+          other_contact_details: values.otherContactDetails,
+        });
 
       if (profileError) {
         console.error("Profile creation error:", profileError);
@@ -347,3 +349,4 @@ export function RegistrationForm() {
     </div>
   );
 }
+};

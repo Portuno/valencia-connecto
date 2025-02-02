@@ -21,7 +21,7 @@ export function Hero() {
               onClick={() => navigate('/register')}
               className="bg-valencia-orange hover:bg-valencia-terracotta text-white text-lg px-8 py-6 h-auto"
             >
-              {t("nav.signup")}
+              Pre-register
             </Button>
           </div>
         </div>

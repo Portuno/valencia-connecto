@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -120,10 +120,10 @@ export function Navbar() {
               {language === "en" ? "ES" : "EN"}
             </Button>
             <Button 
-              onClick={() => navigate('/register')}
+              onClick={() => navigate('/auth')}
               className="bg-valencia-orange hover:bg-valencia-terracotta text-white"
             >
-              {t("nav.signup")}
+              Login
             </Button>
           </div>
 
@@ -198,10 +198,10 @@ export function Navbar() {
                 {language === "en" ? "Español" : "English"}
               </Button>
               <Button 
-                onClick={() => { navigate('/register'); setIsMenuOpen(false); }}
+                onClick={() => { navigate('/auth'); setIsMenuOpen(false); }}
                 className="bg-valencia-orange hover:bg-valencia-terracotta text-white w-full"
               >
-                {t("nav.signup")}
+                Login
               </Button>
             </div>
           </div>

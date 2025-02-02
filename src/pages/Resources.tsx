@@ -1,190 +1,142 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Navbar } from "@/components/Navbar";
-import { LanguageProvider } from "@/contexts/LanguageContext";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, GraduationCap, ScrollText, Plus, Pencil, Trash } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ResourceForm } from "@/components/ResourceForm";
+import { Card, CardContent, CardDescription } from "@/components/ui/card";
+import { Code, Building2, Gavel, Heart, GraduationCap, Users, Globe, Calendar, Mic } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Resources: React.FC = () => {
-  const [isEditing, setIsEditing] = useState<string | null>(null);
-  const [selectedType, setSelectedType] = useState<string>("blogs");
-  const [userId, setUserId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const getSession = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        setUserId(session?.user?.id || null);
-      } catch (error) {
-        console.error("Error fetching session:", error);
-        setUserId(null);
-      }
-    };
-
-    getSession();
-
-    // Subscribe to auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUserId(session?.user?.id || null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const { data: userRole } = useQuery({
-    queryKey: ['userRole', userId],
-    queryFn: async () => {
-      if (!userId) return null;
-      const { data } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', userId)
-        .single();
-      return data?.role;
+  const categories = [
+    {
+      title: "Technology",
+      icon: Code,
+      description: "Digital innovation and tech resources",
+      link: "/resources/tech",
+      color: "text-blue-500",
     },
-    enabled: !!userId
-  });
+    {
+      title: "Finance",
+      icon: Building2,
+      description: "Business and financial guidance",
+      link: "/resources/finance",
+      color: "text-green-500",
+    },
+    {
+      title: "Law",
+      icon: Gavel,
+      description: "Legal resources and documentation",
+      link: "/resources/law",
+      color: "text-valencia-orange",
+    },
+    {
+      title: "Health",
+      icon: Heart,
+      description: "Health and wellness resources",
+      link: "/resources/health",
+      color: "text-red-500",
+    },
+    {
+      title: "Art & Education",
+      icon: GraduationCap,
+      description: "Educational content and artistic resources",
+      link: "/resources/education",
+      color: "text-purple-500",
+    },
+    {
+      title: "Community",
+      icon: Users,
+      description: "Local events and social connections",
+      link: "/resources/community",
+      color: "text-valencia-sage",
+    },
+  ];
 
-  const isAdmin = userRole === 'admin';
-
-  const { data: resources, refetch } = useQuery({
-    queryKey: ['resources', selectedType],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('resources')
-        .select('*')
-        .eq('type', selectedType)
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      return data;
-    }
-  });
-
-  const handleDelete = async (id: string) => {
-    try {
-      const { error } = await supabase
-        .from('resources')
-        .delete()
-        .eq('id', id);
-
-      if (error) {
-        toast.error("Failed to delete resource");
-        return;
-      }
-
-      toast.success("Resource deleted successfully");
-      refetch();
-    } catch (error) {
-      console.error("Error deleting resource:", error);
-      toast.error("An error occurred while deleting the resource");
-    }
-  };
+  const featuredContent = [
+    {
+      category: "Technology",
+      title: "Digital Innovation Guide",
+      description: "Comprehensive guide to tech transformation",
+      icon: Globe,
+      color: "bg-blue-500",
+    },
+    {
+      category: "Community",
+      title: "Local Events Calendar",
+      description: "Upcoming gatherings and meetups",
+      icon: Calendar,
+      color: "bg-valencia-sage",
+    },
+    {
+      title: "Valencia Tech Talks",
+      category: "Education",
+      description: "Weekly podcast featuring local tech leaders",
+      icon: Mic,
+      color: "bg-purple-500",
+    },
+  ];
 
   return (
-    <LanguageProvider>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <div className="container mx-auto px-4 py-8 mt-16">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-valencia-brown">Resources</h1>
-            {isAdmin && (
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button className="bg-valencia-orange hover:bg-valencia-terracotta">
-                    <Plus className="h-4 w-4 mr-2" />
-                    Add Resource
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Add New Resource</DialogTitle>
-                  </DialogHeader>
-                  <ResourceForm onSuccess={() => {
-                    refetch();
-                    toast.success("Resource added successfully");
-                  }} />
-                </DialogContent>
-              </Dialog>
-            )}
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <main className="container mx-auto px-4 py-8 mt-16">
+        <section className="mb-12">
+          <h1 className="text-3xl font-bold text-valencia-brown mb-2">Explore Categories</h1>
+          <p className="text-gray-600 mb-6">Discover resources across different areas</p>
           
-          <Tabs defaultValue="blogs" className="w-full" onValueChange={setSelectedType}>
-            <TabsList className="mb-8">
-              <TabsTrigger value="blogs" className="flex items-center gap-2">
-                <ScrollText className="h-4 w-4" />
-                Blogs
-              </TabsTrigger>
-              <TabsTrigger value="guides" className="flex items-center gap-2">
-                <BookOpen className="h-4 w-4" />
-                Guides
-              </TabsTrigger>
-              <TabsTrigger value="courses" className="flex items-center gap-2">
-                <GraduationCap className="h-4 w-4" />
-                Courses
-              </TabsTrigger>
-            </TabsList>
-
-            {['blogs', 'guides', 'courses'].map((type) => (
-              <TabsContent key={type} value={type} className="space-y-6">
-                {resources?.filter(r => r.type === type).map((resource) => (
-                  <Card key={resource.id}>
-                    <CardHeader className="flex flex-row items-center justify-between">
-                      <div>
-                        <CardTitle>{resource.title}</CardTitle>
-                        <CardDescription>
-                          {new Date(resource.created_at).toLocaleDateString()}
-                        </CardDescription>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((category) => (
+              <Link 
+                key={category.title}
+                to={category.link}
+                className="block hover:transform hover:scale-105 transition-all duration-300"
+              >
+                <Card className="h-full bg-white shadow-md hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className={`p-3 rounded-lg bg-gray-100 ${category.color}`}>
+                        <category.icon className="w-6 h-6" />
                       </div>
-                      {isAdmin && (
-                        <div className="flex gap-2">
-                          <Dialog open={isEditing === resource.id} onOpenChange={(open) => setIsEditing(open ? resource.id : null)}>
-                            <DialogTrigger asChild>
-                              <Button variant="outline" size="icon">
-                                <Pencil className="h-4 w-4" />
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                              <DialogHeader>
-                                <DialogTitle>Edit Resource</DialogTitle>
-                              </DialogHeader>
-                              <ResourceForm 
-                                resource={resource}
-                                onSuccess={() => {
-                                  setIsEditing(null);
-                                  refetch();
-                                  toast.success("Resource updated successfully");
-                                }} 
-                              />
-                            </DialogContent>
-                          </Dialog>
-                          <Button 
-                            variant="destructive" 
-                            size="icon"
-                            onClick={() => handleDelete(resource.id)}
-                          >
-                            <Trash className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      )}
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-600">{resource.content}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </TabsContent>
+                      <div>
+                        <h3 className="text-xl font-semibold text-valencia-brown mb-2">
+                          {category.title}
+                        </h3>
+                        <CardDescription>{category.description}</CardDescription>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
-          </Tabs>
-        </div>
-      </div>
-    </LanguageProvider>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold text-valencia-brown mb-2">Featured Content</h2>
+          <p className="text-gray-600 mb-6">Latest resources and highlights</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredContent.map((content) => (
+              <Card 
+                key={content.title}
+                className="group relative overflow-hidden hover:transform hover:scale-105 transition-all duration-300"
+              >
+                <CardContent className="p-6">
+                  <div className={`absolute top-0 right-0 w-24 h-24 ${content.color} opacity-10 rounded-bl-full`} />
+                  <div className="relative">
+                    <span className={`inline-block px-3 py-1 rounded-full text-sm ${content.color} bg-opacity-10 mb-4`}>
+                      {content.category}
+                    </span>
+                    <h3 className="text-xl font-semibold text-valencia-brown mb-2">
+                      {content.title}
+                    </h3>
+                    <CardDescription>{content.description}</CardDescription>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
   );
 };
 

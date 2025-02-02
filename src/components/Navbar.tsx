@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function Navbar() {
   const { t, language, setLanguage } = useLanguage();
@@ -31,13 +37,47 @@ export function Navbar() {
             >
               {t("nav.home")}
             </a>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); navigate('/events'); }}
-              className="text-gray-600 hover:text-valencia-orange transition-colors"
-            >
-              {t("nav.events")}
-            </a>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-600 hover:text-valencia-orange transition-colors">
+                {t("nav.events")} <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={() => navigate('/events/upcoming')}>
+                  Upcoming Events
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/events/previous')}>
+                  Previous Events
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-600 hover:text-valencia-orange transition-colors">
+                Resources <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={() => navigate('/verticals/tech')}>
+                  Technology
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/verticals/law')}>
+                  Law
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/verticals/education')}>
+                  Education & Art
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/verticals/business')}>
+                  Business
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/verticals/health')}>
+                  Health & Wellness
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/verticals/hospitality')}>
+                  Hospitality
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); navigate('/feedback'); }}
@@ -45,20 +85,7 @@ export function Navbar() {
             >
               {t("nav.feedback")}
             </a>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); navigate('/projects'); }}
-              className="text-gray-600 hover:text-valencia-orange transition-colors"
-            >
-              Projects
-            </a>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); navigate('/resources'); }}
-              className="text-gray-600 hover:text-valencia-orange transition-colors"
-            >
-              Resources
-            </a>
+
             <Button
               variant="ghost"
               onClick={() => setLanguage(language === "en" ? "es" : "en")}
@@ -93,33 +120,49 @@ export function Navbar() {
               >
                 {t("nav.home")}
               </a>
-              <a 
-                href="#" 
-                onClick={(e) => { e.preventDefault(); navigate('/events'); setIsMenuOpen(false); }}
-                className="text-gray-600 hover:text-valencia-orange transition-colors"
-              >
-                {t("nav.events")}
-              </a>
+              <div className="space-y-2 pl-4">
+                <p className="text-sm font-semibold text-gray-500">Events</p>
+                <a 
+                  href="#" 
+                  onClick={(e) => { e.preventDefault(); navigate('/events/upcoming'); setIsMenuOpen(false); }}
+                  className="block text-gray-600 hover:text-valencia-orange transition-colors"
+                >
+                  Upcoming Events
+                </a>
+                <a 
+                  href="#" 
+                  onClick={(e) => { e.preventDefault(); navigate('/events/previous'); setIsMenuOpen(false); }}
+                  className="block text-gray-600 hover:text-valencia-orange transition-colors"
+                >
+                  Previous Events
+                </a>
+              </div>
+              <div className="space-y-2 pl-4">
+                <p className="text-sm font-semibold text-gray-500">Resources</p>
+                {[
+                  { path: '/verticals/tech', label: 'Technology' },
+                  { path: '/verticals/law', label: 'Law' },
+                  { path: '/verticals/education', label: 'Education & Art' },
+                  { path: '/verticals/business', label: 'Business' },
+                  { path: '/verticals/health', label: 'Health & Wellness' },
+                  { path: '/verticals/hospitality', label: 'Hospitality' },
+                ].map((item) => (
+                  <a
+                    key={item.path}
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); navigate(item.path); setIsMenuOpen(false); }}
+                    className="block text-gray-600 hover:text-valencia-orange transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
               <a 
                 href="#" 
                 onClick={(e) => { e.preventDefault(); navigate('/feedback'); setIsMenuOpen(false); }}
                 className="text-gray-600 hover:text-valencia-orange transition-colors"
               >
                 {t("nav.feedback")}
-              </a>
-              <a 
-                href="#" 
-                onClick={(e) => { e.preventDefault(); navigate('/projects'); setIsMenuOpen(false); }}
-                className="text-gray-600 hover:text-valencia-orange transition-colors"
-              >
-                Projects
-              </a>
-              <a 
-                href="#" 
-                onClick={(e) => { e.preventDefault(); navigate('/resources'); setIsMenuOpen(false); }}
-                className="text-gray-600 hover:text-valencia-orange transition-colors"
-              >
-                Resources
               </a>
               <Button
                 variant="ghost"

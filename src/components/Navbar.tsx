@@ -4,11 +4,12 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 export function Navbar() {
   const { t, language, setLanguage } = useLanguage();
@@ -38,57 +39,70 @@ export function Navbar() {
               {t("nav.home")}
             </a>
             
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  className="flex items-center text-gray-600 hover:text-valencia-orange transition-colors"
-                  onClick={() => navigate('/events')}
-                >
-                  {t("nav.events")} <ChevronDown className="ml-1 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48 bg-white">
-                <DropdownMenuItem onClick={() => navigate('/events/upcoming')}>
-                  Upcoming Events
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/events/previous')}>
-                  Previous Events
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger 
+                    className="text-gray-600 hover:text-valencia-orange transition-colors"
+                    onClick={() => navigate('/events')}
+                  >
+                    {t("nav.events")}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-white">
+                    <div className="w-48 p-2">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start"
+                        onClick={() => navigate('/events/upcoming')}
+                      >
+                        Upcoming Events
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start"
+                        onClick={() => navigate('/events/previous')}
+                      >
+                        Previous Events
+                      </Button>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  className="flex items-center text-gray-600 hover:text-valencia-orange transition-colors"
-                  onClick={() => navigate('/resources')}
-                >
-                  Resources <ChevronDown className="ml-1 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48 bg-white">
-                <DropdownMenuItem onClick={() => navigate('/verticals/tech')}>
-                  Technology
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/verticals/law')}>
-                  Law
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/verticals/audiovisual')}>
-                  Audiovisual
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/verticals/business')}>
-                  Business
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/verticals/health')}>
-                  Health & Wellness
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/verticals/hospitality')}>
-                  Community
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger 
+                    className="text-gray-600 hover:text-valencia-orange transition-colors"
+                    onClick={() => navigate('/resources')}
+                  >
+                    Resources
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-white">
+                    <div className="w-48 p-2">
+                      {[
+                        { path: '/verticals/tech', label: 'Technology' },
+                        { path: '/verticals/law', label: 'Law' },
+                        { path: '/verticals/audiovisual', label: 'Audiovisual' },
+                        { path: '/verticals/business', label: 'Business' },
+                        { path: '/verticals/health', label: 'Health & Wellness' },
+                        { path: '/verticals/hospitality', label: 'Community' },
+                      ].map((item) => (
+                        <Button
+                          key={item.path}
+                          variant="ghost"
+                          className="w-full justify-start"
+                          onClick={() => navigate(item.path)}
+                        >
+                          {item.label}
+                        </Button>
+                      ))}
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
 
             <a 
               href="#" 

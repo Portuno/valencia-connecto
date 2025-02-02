@@ -15,7 +15,7 @@ import Resources from "./pages/Resources";
 import Verticals from "./pages/Verticals";
 import Law from "./pages/verticals/Law";
 import Tech from "./pages/verticals/Tech";
-import Education from "./pages/verticals/Education";
+import Audiovisual from "./pages/verticals/Audiovisual";
 import Business from "./pages/verticals/Business";
 import Health from "./pages/verticals/Health";
 import Hospitality from "./pages/verticals/Hospitality";
@@ -41,7 +41,7 @@ const App = () => (
             <Route path="/verticals" element={<Verticals />} />
             <Route path="/verticals/law" element={<Law />} />
             <Route path="/verticals/tech" element={<Tech />} />
-            <Route path="/verticals/education" element={<Education />} />
+            <Route path="/verticals/audiovisual" element={<Audiovisual />} />
             <Route path="/verticals/business" element={<Business />} />
             <Route path="/verticals/health" element={<Health />} />
             <Route path="/verticals/hospitality" element={<Hospitality />} />

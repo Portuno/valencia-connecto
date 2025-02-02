@@ -39,10 +39,16 @@ export function Navbar() {
             </a>
             
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center text-gray-600 hover:text-valencia-orange transition-colors">
-                {t("nav.events")} <ChevronDown className="ml-1 h-4 w-4" />
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  className="flex items-center text-gray-600 hover:text-valencia-orange transition-colors"
+                  onClick={() => navigate('/events')}
+                >
+                  {t("nav.events")} <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent align="end" className="w-48 bg-white">
                 <DropdownMenuItem onClick={() => navigate('/events/upcoming')}>
                   Upcoming Events
                 </DropdownMenuItem>
@@ -53,18 +59,24 @@ export function Navbar() {
             </DropdownMenu>
 
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center text-gray-600 hover:text-valencia-orange transition-colors">
-                Resources <ChevronDown className="ml-1 h-4 w-4" />
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  className="flex items-center text-gray-600 hover:text-valencia-orange transition-colors"
+                  onClick={() => navigate('/resources')}
+                >
+                  Resources <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent align="end" className="w-48 bg-white">
                 <DropdownMenuItem onClick={() => navigate('/verticals/tech')}>
                   Technology
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/verticals/law')}>
                   Law
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/verticals/education')}>
-                  Education & Art
+                <DropdownMenuItem onClick={() => navigate('/verticals/audiovisual')}>
+                  Audiovisual
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/verticals/business')}>
                   Business
@@ -73,7 +85,7 @@ export function Navbar() {
                   Health & Wellness
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/verticals/hospitality')}>
-                  Hospitality
+                  Community
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -142,10 +154,10 @@ export function Navbar() {
                 {[
                   { path: '/verticals/tech', label: 'Technology' },
                   { path: '/verticals/law', label: 'Law' },
-                  { path: '/verticals/education', label: 'Education & Art' },
+                  { path: '/verticals/audiovisual', label: 'Audiovisual' },
                   { path: '/verticals/business', label: 'Business' },
                   { path: '/verticals/health', label: 'Health & Wellness' },
-                  { path: '/verticals/hospitality', label: 'Hospitality' },
+                  { path: '/verticals/hospitality', label: 'Community' },
                 ].map((item) => (
                   <a
                     key={item.path}

@@ -16,7 +16,7 @@ const formSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-const Auth = () => {
+export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
 
@@ -56,11 +56,11 @@ const Auth = () => {
 
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-valencia-cream/30 to-valencia-sage/20">
         <Navbar />
         <div className="pt-32 pb-16">
           <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-            <h1 className="text-2xl font-bold text-center mb-6">
+            <h1 className="text-2xl font-bold text-center mb-6 text-valencia-brown">
               {isLogin ? "Login" : "Sign Up"}
             </h1>
             <Form {...form}>
@@ -70,7 +70,7 @@ const Auth = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-valencia-brown">Email</FormLabel>
                       <FormControl>
                         <Input type="email" {...field} />
                       </FormControl>
@@ -83,7 +83,7 @@ const Auth = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel className="text-valencia-brown">Password</FormLabel>
                       <FormControl>
                         <Input type="password" {...field} />
                       </FormControl>
@@ -91,7 +91,7 @@ const Auth = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full bg-valencia-orange hover:bg-valencia-terracotta">
+                <Button type="submit" className="w-full bg-valencia-orange hover:bg-valencia-terracotta text-white">
                   {isLogin ? "Login" : "Sign Up"}
                 </Button>
               </form>
@@ -111,6 +111,4 @@ const Auth = () => {
       </div>
     </LanguageProvider>
   );
-};
-
-export default Auth;
+}

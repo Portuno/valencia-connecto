@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
@@ -18,10 +19,10 @@ export function Hero() {
           </p>
           <div className="pt-4">
             <Button 
-              onClick={() => navigate('/register')}
+              onClick={() => navigate('/auth')}
               className="bg-valencia-orange hover:bg-valencia-terracotta text-white text-lg px-8 py-6 h-auto"
             >
-              Pre-register
+              Sign Up
             </Button>
           </div>
         </div>

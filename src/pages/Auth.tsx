@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -8,8 +9,6 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { Navbar } from "@/components/Navbar";
-import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -55,60 +54,57 @@ export default function Auth() {
   };
 
   return (
-    <LanguageProvider>
-      <div className="min-h-screen bg-gradient-to-br from-valencia-cream/30 to-valencia-sage/20">
-        <Navbar />
-        <div className="pt-32 pb-16">
-          <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-            <h1 className="text-2xl font-bold text-center mb-6 text-valencia-brown">
-              {isLogin ? "Login" : "Sign Up"}
-            </h1>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-valencia-brown">Email</FormLabel>
-                      <FormControl>
-                        <Input type="email" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-valencia-brown">Password</FormLabel>
-                      <FormControl>
-                        <Input type="password" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" className="w-full bg-valencia-orange hover:bg-valencia-terracotta text-white">
-                  {isLogin ? "Login" : "Sign Up"}
-                </Button>
-              </form>
-            </Form>
-            <div className="mt-4 text-center">
-              <button
-                onClick={() => setIsLogin(!isLogin)}
-                className="text-valencia-orange hover:text-valencia-terracotta"
-              >
-                {isLogin
-                  ? "Don't have an account? Sign up"
-                  : "Already have an account? Login"}
-              </button>
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-valencia-cream/30 to-valencia-sage/20">
+      <div className="pt-32 pb-16">
+        <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+          <h1 className="text-2xl font-bold text-center mb-6 text-valencia-brown">
+            {isLogin ? "Login" : "Sign Up"}
+          </h1>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-valencia-brown">Email</FormLabel>
+                    <FormControl>
+                      <Input type="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-valencia-brown">Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full bg-valencia-orange hover:bg-valencia-terracotta text-white">
+                {isLogin ? "Login" : "Sign Up"}
+              </Button>
+            </form>
+          </Form>
+          <div className="mt-4 text-center">
+            <button
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-valencia-orange hover:text-valencia-terracotta"
+            >
+              {isLogin
+                ? "Don't have an account? Sign up"
+                : "Already have an account? Login"}
+            </button>
           </div>
         </div>
       </div>
-    </LanguageProvider>
+    </div>
   );
 }

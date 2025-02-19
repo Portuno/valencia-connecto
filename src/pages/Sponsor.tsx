@@ -10,10 +10,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const sponsorFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  contactNumber: z.string().min(6, "Please enter a valid contact number"),
-  company: z.string().min(2, "Company name must be at least 2 characters"),
-  message: z.string().min(10, "Please provide a brief message about your interest"),
+  name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
+  contactNumber: z.string().min(6, "Por favor, introduce un número de teléfono válido"),
+  company: z.string().min(2, "El nombre de la empresa debe tener al menos 2 caracteres"),
+  message: z.string().min(10, "Por favor, proporciona un breve mensaje sobre tu interés"),
 });
 
 export default function Sponsor() {
@@ -40,11 +40,11 @@ export default function Sponsor() {
 
       if (error) throw error;
 
-      toast.success("Thank you for your interest! We'll contact you soon.");
+      toast.success("¡Gracias por tu interés! Nos pondremos en contacto contigo pronto.");
       form.reset();
     } catch (error) {
-      console.error("Error submitting sponsor form:", error);
-      toast.error("Failed to submit form. Please try again.");
+      console.error("Error al enviar el formulario:", error);
+      toast.error("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
     }
   };
 
@@ -54,12 +54,13 @@ export default function Sponsor() {
         <div className="max-w-2xl mx-auto space-y-8">
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-bold text-valencia-brown">
-              Sponsor Our Events
+              Patrocina Nuestros Eventos
             </h1>
             <p className="text-xl text-valencia-brown/80">
-              Join us in building Valencia's international community! By sponsoring our events, 
-              you'll connect with a diverse group of professionals and make a meaningful impact 
-              in our growing ecosystem.
+              ¡Únete a construir el hub tecnológico de Valencia! Como patrocinador de nuestros eventos, 
+              conectarás con profesionales internacionales del sector tech y tendrás un impacto directo 
+              en el crecimiento del ecosistema tecnológico de la ciudad. Tus aportes ayudarán a crear 
+              espacios de networking, workshops y conferencias que fortalecen nuestra comunidad internacional.
             </p>
           </div>
 
@@ -71,9 +72,9 @@ export default function Sponsor() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>Nombre</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your name" {...field} />
+                        <Input placeholder="Tu nombre" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -85,7 +86,7 @@ export default function Sponsor() {
                   name="contactNumber"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Contact Number</FormLabel>
+                      <FormLabel>Número de Contacto</FormLabel>
                       <FormControl>
                         <Input 
                           type="tel" 
@@ -103,9 +104,9 @@ export default function Sponsor() {
                   name="company"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Company</FormLabel>
+                      <FormLabel>Empresa</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your company name" {...field} />
+                        <Input placeholder="Nombre de tu empresa" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -117,10 +118,10 @@ export default function Sponsor() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Message</FormLabel>
+                      <FormLabel>Mensaje</FormLabel>
                       <FormControl>
                         <Textarea 
-                          placeholder="Tell us about your interest in sponsoring our events..."
+                          placeholder="Cuéntanos sobre tu interés en patrocinar nuestros eventos..."
                           className="min-h-[100px]"
                           {...field}
                         />
@@ -134,7 +135,7 @@ export default function Sponsor() {
                   type="submit" 
                   className="w-full bg-valencia-orange hover:bg-valencia-terracotta"
                 >
-                  Submit Sponsorship Interest
+                  Enviar Solicitud de Patrocinio
                 </Button>
               </form>
             </Form>

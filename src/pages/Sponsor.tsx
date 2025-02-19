@@ -29,16 +29,14 @@ export default function Sponsor() {
 
   const onSubmit = async (values: z.infer<typeof sponsorFormSchema>) => {
     try {
-      // Format the message to include all the sponsor information
-      const formattedMessage = `Sponsor Interest:
-Name: ${values.name}
-Contact: ${values.contactNumber}
-Company: ${values.company}
-Message: ${values.message}`;
-
       const { error } = await supabase
-        .from("feedback")
-        .insert([{ message: formattedMessage }]);
+        .from("sponsors")
+        .insert([{
+          name: values.name,
+          contact_number: values.contactNumber,
+          company: values.company,
+          message: values.message
+        }]);
 
       if (error) throw error;
 

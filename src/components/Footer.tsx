@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -34,6 +35,11 @@ export function Footer() {
               <li>
                 <Link to="/feedback" className="text-gray-400 hover:text-white transition-colors">
                   {t("nav.feedback")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/sponsor" className="text-gray-400 hover:text-white transition-colors">
+                  Sponsor
                 </Link>
               </li>
             </ul>

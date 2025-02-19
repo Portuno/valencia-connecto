@@ -20,6 +20,7 @@ import Audiovisual from "./pages/verticals/Audiovisual";
 import Business from "./pages/verticals/Business";
 import Health from "./pages/verticals/Health";
 import Hospitality from "./pages/verticals/Hospitality";
+import Sponsor from "./pages/Sponsor";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/verticals/business" element={<Business />} />
             <Route path="/verticals/health" element={<Health />} />
             <Route path="/verticals/hospitality" element={<Hospitality />} />
+            <Route path="/sponsor" element={<Sponsor />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

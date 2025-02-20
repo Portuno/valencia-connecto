@@ -172,8 +172,7 @@ export type Database = {
         Row: {
           created_at: string
           description: string
-          founder_names: string[]
-          founders_count: number
+          email: string
           id: string
           name: string
           website: string
@@ -181,8 +180,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description: string
-          founder_names?: string[]
-          founders_count: number
+          email: string
           id?: string
           name: string
           website: string
@@ -190,8 +188,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string
-          founder_names?: string[]
-          founders_count?: number
+          email?: string
           id?: string
           name?: string
           website?: string

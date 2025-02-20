@@ -13,7 +13,7 @@ const projectFormSchema = z.object({
   name: z.string().min(2, "El nombre del proyecto debe tener al menos 2 caracteres"),
   website: z.string().url("Por favor, introduce una URL válida"),
   email: z.string().email("Por favor, introduce un email válido"),
-  message: z.string().min(10, "Por favor, proporciona una descripción de tu proyecto"),
+  description: z.string().min(10, "Por favor, proporciona una descripción de tu proyecto"),
 });
 
 export default function Projects() {
@@ -23,7 +23,7 @@ export default function Projects() {
       name: "",
       website: "",
       email: "",
-      message: "",
+      description: "",
     },
   });
 
@@ -31,12 +31,12 @@ export default function Projects() {
     try {
       const { error } = await supabase
         .from("projects")
-        .insert([{
+        .insert({
           name: values.name,
           website: values.website,
           email: values.email,
-          message: values.message
-        }]);
+          description: values.description
+        });
 
       if (error) throw error;
 
@@ -117,7 +117,7 @@ export default function Projects() {
 
                 <FormField
                   control={form.control}
-                  name="message"
+                  name="description"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Descripción del Proyecto</FormLabel>

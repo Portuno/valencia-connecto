@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { Home } from "lucide-react";
 
 const sponsorFormSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
@@ -17,6 +19,7 @@ const sponsorFormSchema = z.object({
 });
 
 export default function Sponsor() {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof sponsorFormSchema>>({
     resolver: zodResolver(sponsorFormSchema),
     defaultValues: {
@@ -50,7 +53,15 @@ export default function Sponsor() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-valencia-cream/30 to-valencia-sage/20">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16 relative">
+        <Button
+          onClick={() => navigate('/')}
+          className="absolute top-4 left-4 bg-valencia-orange hover:bg-valencia-terracotta flex items-center gap-2"
+        >
+          <Home className="h-4 w-4" />
+          Volver al Inicio
+        </Button>
+
         <div className="max-w-2xl mx-auto space-y-8">
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-bold text-valencia-brown">

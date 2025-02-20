@@ -11,7 +11,7 @@ import { toast } from "sonner";
 
 const sponsorFormSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
-  contactNumber: z.string().min(6, "Por favor, introduce un número de teléfono válido"),
+  email: z.string().email("Por favor, introduce un email válido"),
   company: z.string().min(2, "El nombre de la empresa debe tener al menos 2 caracteres"),
   message: z.string().min(10, "Por favor, proporciona un breve mensaje sobre tu interés"),
 });
@@ -21,7 +21,7 @@ export default function Sponsor() {
     resolver: zodResolver(sponsorFormSchema),
     defaultValues: {
       name: "",
-      contactNumber: "",
+      email: "",
       company: "",
       message: "",
     },
@@ -33,7 +33,7 @@ export default function Sponsor() {
         .from("sponsors")
         .insert([{
           name: values.name,
-          contact_number: values.contactNumber,
+          email: values.email,
           company: values.company,
           message: values.message
         }]);
@@ -59,8 +59,7 @@ export default function Sponsor() {
             <p className="text-xl text-valencia-brown/80">
               ¡Únete a construir el hub tecnológico de Valencia! Como patrocinador de nuestros eventos, 
               conectarás con profesionales internacionales del sector tech y tendrás un impacto directo 
-              en el crecimiento del ecosistema tecnológico de la ciudad. Tus aportes ayudarán a crear 
-              espacios de networking, workshops y conferencias que fortalecen nuestra comunidad internacional.
+              en el crecimiento del ecosistema tecnológico de la ciudad.
             </p>
           </div>
 
@@ -83,14 +82,14 @@ export default function Sponsor() {
 
                 <FormField
                   control={form.control}
-                  name="contactNumber"
+                  name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Número de Contacto</FormLabel>
+                      <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input 
-                          type="tel" 
-                          placeholder="+34 XXX XXX XXX" 
+                          type="email" 
+                          placeholder="tu@email.com" 
                           {...field} 
                         />
                       </FormControl>

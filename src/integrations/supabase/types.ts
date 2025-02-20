@@ -231,24 +231,24 @@ export type Database = {
       sponsors: {
         Row: {
           company: string
-          contact_number: string
           created_at: string | null
+          email: string
           id: string
           message: string
           name: string
         }
         Insert: {
           company: string
-          contact_number: string
           created_at?: string | null
+          email: string
           id?: string
           message: string
           name: string
         }
         Update: {
           company?: string
-          contact_number?: string
           created_at?: string | null
+          email?: string
           id?: string
           message?: string
           name?: string

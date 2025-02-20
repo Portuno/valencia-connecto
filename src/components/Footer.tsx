@@ -42,6 +42,11 @@ export function Footer() {
                   Sponsor
                 </Link>
               </li>
+              <li>
+                <Link to="/projects" className="text-gray-400 hover:text-white transition-colors">
+                  Projects
+                </Link>
+              </li>
             </ul>
           </div>
 

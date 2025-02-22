@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState } from "react";
 
 type Language = "en" | "es";
@@ -60,7 +61,7 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>("es"); // Changed default to "es"
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations.en] || key;

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Menu, X } from "lucide-react";
@@ -33,10 +34,10 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <a 
               href="#" 
-              onClick={(e) => { e.preventDefault(); navigate('/'); }} 
+              onClick={(e) => { e.preventDefault(); navigate('/asado'); }} 
               className="text-gray-600 hover:text-valencia-orange transition-colors"
             >
-              {t("nav.home")}
+              🔥 Asado
             </a>
             
             <NavigationMenu>
@@ -55,14 +56,14 @@ export function Navbar() {
                         className="w-full justify-start"
                         onClick={() => navigate('/events/upcoming')}
                       >
-                        Upcoming Events
+                        Próximos Eventos
                       </Button>
                       <Button
                         variant="ghost"
                         className="w-full justify-start"
                         onClick={() => navigate('/events/previous')}
                       >
-                        Previous Events
+                        Eventos Anteriores
                       </Button>
                     </div>
                   </NavigationMenuContent>
@@ -77,17 +78,17 @@ export function Navbar() {
                     className="text-gray-600 hover:text-valencia-orange transition-colors"
                     onClick={() => navigate('/resources')}
                   >
-                    Resources
+                    Recursos
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white">
                     <div className="w-48 p-2">
                       {[
-                        { path: '/verticals/tech', label: 'Technology' },
-                        { path: '/verticals/law', label: 'Law' },
+                        { path: '/verticals/tech', label: 'Tecnología' },
+                        { path: '/verticals/law', label: 'Legal' },
                         { path: '/verticals/audiovisual', label: 'Audiovisual' },
-                        { path: '/verticals/business', label: 'Business' },
-                        { path: '/verticals/health', label: 'Health & Wellness' },
-                        { path: '/verticals/hospitality', label: 'Community' },
+                        { path: '/verticals/business', label: 'Negocios' },
+                        { path: '/verticals/health', label: 'Salud & Bienestar' },
+                        { path: '/verticals/hospitality', label: 'Comunidad' },
                       ].map((item) => (
                         <Button
                           key={item.path}
@@ -141,37 +142,37 @@ export function Navbar() {
             <div className="flex flex-col space-y-4">
               <a 
                 href="#" 
-                onClick={(e) => { e.preventDefault(); navigate('/'); setIsMenuOpen(false); }}
+                onClick={(e) => { e.preventDefault(); navigate('/asado'); setIsMenuOpen(false); }}
                 className="text-gray-600 hover:text-valencia-orange transition-colors"
               >
-                {t("nav.home")}
+                🔥 Asado
               </a>
               <div className="space-y-2 pl-4">
-                <p className="text-sm font-semibold text-gray-500">Events</p>
+                <p className="text-sm font-semibold text-gray-500">Eventos</p>
                 <a 
                   href="#" 
                   onClick={(e) => { e.preventDefault(); navigate('/events/upcoming'); setIsMenuOpen(false); }}
                   className="block text-gray-600 hover:text-valencia-orange transition-colors"
                 >
-                  Upcoming Events
+                  Próximos Eventos
                 </a>
                 <a 
                   href="#" 
                   onClick={(e) => { e.preventDefault(); navigate('/events/previous'); setIsMenuOpen(false); }}
                   className="block text-gray-600 hover:text-valencia-orange transition-colors"
                 >
-                  Previous Events
+                  Eventos Anteriores
                 </a>
               </div>
               <div className="space-y-2 pl-4">
-                <p className="text-sm font-semibold text-gray-500">Resources</p>
+                <p className="text-sm font-semibold text-gray-500">Recursos</p>
                 {[
-                  { path: '/verticals/tech', label: 'Technology' },
-                  { path: '/verticals/law', label: 'Law' },
+                  { path: '/verticals/tech', label: 'Tecnología' },
+                  { path: '/verticals/law', label: 'Legal' },
                   { path: '/verticals/audiovisual', label: 'Audiovisual' },
-                  { path: '/verticals/business', label: 'Business' },
-                  { path: '/verticals/health', label: 'Health & Wellness' },
-                  { path: '/verticals/hospitality', label: 'Community' },
+                  { path: '/verticals/business', label: 'Negocios' },
+                  { path: '/verticals/health', label: 'Salud & Bienestar' },
+                  { path: '/verticals/hospitality', label: 'Comunidad' },
                 ].map((item) => (
                   <a
                     key={item.path}

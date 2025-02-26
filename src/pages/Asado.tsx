@@ -9,6 +9,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const AsadoPage = () => {
   const [formData, setFormData] = useState({
@@ -22,11 +23,51 @@ const AsadoPage = () => {
     additionalInfo: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log(formData);
-    toast.success("¡Gracias por registrarte! Te contactaremos pronto con más detalles.");
+    
+    if (!formData.dietPreference) {
+      toast.error("Por favor selecciona tu preferencia de comida");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('asado_registrations')
+        .insert({
+          full_name: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          allergies: formData.allergies || null,
+          diet_preference: formData.dietPreference,
+          guests: formData.guests || null,
+          help_organize: formData.helpOrganize,
+          additional_info: formData.additionalInfo || null
+        });
+
+      if (error) throw error;
+
+      toast.success("¡Gracias por registrarte! Te contactaremos pronto con más detalles.");
+      setFormData({
+        fullName: "",
+        phone: "",
+        email: "",
+        allergies: "",
+        dietPreference: "",
+        guests: "",
+        helpOrganize: false,
+        additionalInfo: ""
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error("Hubo un error al enviar tu registro. Por favor intenta de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -144,9 +185,10 @@ const AsadoPage = () => {
 
             <Button 
               type="submit"
+              disabled={isSubmitting}
               className="w-full bg-valencia-orange hover:bg-valencia-terracotta text-white"
             >
-              Reservar mi lugar
+              {isSubmitting ? "Enviando..." : "Reservar mi lugar"}
             </Button>
           </form>
         </div>

@@ -32,48 +32,67 @@ const AsadoPage = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Función para avanzar al siguiente paso
+  // Determinar el saludo según la hora del día
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return "Muy buenos días";
+    if (hour >= 12 && hour < 20) return "Muy buenas tardes";
+    return "Muy buenas noches";
+  };
+
+  const [greeting] = useState(getGreeting());
+  
+  // Avanzar automáticamente al siguiente paso cuando se completan ciertos campos
+  useEffect(() => {
+    if (formData.gender && step === 1) {
+      setStep(2);
+      setTimeout(() => scrollToBottom(), 100);
+    }
+  }, [formData.gender]);
+
+  useEffect(() => {
+    if (formData.fullName && step === 2) {
+      setStep(3);
+      setTimeout(() => scrollToBottom(), 100);
+    }
+  }, [formData.fullName]);
+
+  useEffect(() => {
+    if (formData.phone && step === 3) {
+      setStep(4);
+      setTimeout(() => scrollToBottom(), 100);
+    }
+  }, [formData.phone]);
+
+  useEffect(() => {
+    if (formData.email && step === 4) {
+      setStep(5);
+      setTimeout(() => scrollToBottom(), 100);
+    }
+  }, [formData.email]);
+
+  // Función para avanzar al siguiente paso para campos que no tienen autoavance
   const nextStep = () => {
-    if (step === 0 && !formData.gender) {
-      toast.error("Por favor selecciona una opción");
-      return;
-    }
-    
-    if (step === 1 && !formData.fullName) {
-      toast.error("Por favor ingresa tu nombre completo");
-      return;
-    }
-    
-    if (step === 2 && !formData.phone) {
-      toast.error("Por favor ingresa tu número de teléfono");
-      return;
-    }
-    
-    if (step === 3 && !formData.email) {
-      toast.error("Por favor ingresa tu correo electrónico");
-      return;
-    }
-    
-    if (step === 5 && !formData.dietPreference) {
-      toast.error("Por favor selecciona tu preferencia de comida");
-      return;
-    }
-    
     setStep(step + 1);
-    
-    // Scroll suave hacia abajo después de cada paso
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      });
-    }, 100);
+    setTimeout(() => scrollToBottom(), 100);
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
   };
 
   // Función para manejar el envío final del formulario
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!formData.dietPreference) {
+      toast.error("Por favor selecciona tu preferencia de comida");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -141,39 +160,36 @@ const AsadoPage = () => {
               </Card>
             )}
             
-            {/* Paso 1: Selección de género */}
+            {/* Paso 1: Selección de género con saludo dinámico */}
             {step >= 1 && (
               <Card className={`border ${step === 1 ? 'border-indigo-200 bg-indigo-50' : 'border-gray-200'} shadow-sm`}>
                 <CardContent className="p-6">
                   <div className="flex items-start mb-4">
                     <User className="h-5 w-5 mr-3 text-indigo-500 mt-0.5" />
-                    <span className="text-gray-700 font-medium">¿Cómo prefieres que te tratemos?</span>
+                    <span className="text-gray-700 font-medium">{greeting}</span>
                   </div>
-                  <div className="ml-8 mt-4">
-                    <RadioGroup
-                      value={formData.gender}
-                      onValueChange={(value) => setFormData({...formData, gender: value})}
-                      className="flex gap-4"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="señora" id="señora" />
-                        <Label htmlFor="señora">Señora</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="señor" id="señor" />
-                        <Label htmlFor="señor">Señor</Label>
-                      </div>
-                    </RadioGroup>
-                    
-                    {step === 1 && (
-                      <Button 
-                        onClick={nextStep}
-                        className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
+                  {step === 1 ? (
+                    <div className="ml-8 mt-4">
+                      <RadioGroup
+                        value={formData.gender}
+                        onValueChange={(value) => setFormData({...formData, gender: value})}
+                        className="flex gap-4"
                       >
-                        Continuar
-                      </Button>
-                    )}
-                  </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="señora" id="señora" />
+                          <Label htmlFor="señora">Señora</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="señor" id="señor" />
+                          <Label htmlFor="señor">Señor</Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
+                  ) : (
+                    <div className="ml-8 mt-2">
+                      <p className="text-gray-600">{formData.gender === "señora" ? "Señora" : "Señor"}</p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             )}
@@ -193,16 +209,10 @@ const AsadoPage = () => {
                       placeholder="Escribe tu nombre y apellidos"
                       className={step > 2 ? "bg-gray-50" : ""}
                       readOnly={step > 2}
+                      onBlur={() => {
+                        if (formData.fullName && step === 2) nextStep();
+                      }}
                     />
-                    
-                    {step === 2 && (
-                      <Button 
-                        onClick={nextStep}
-                        className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
-                      >
-                        Continuar
-                      </Button>
-                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -224,16 +234,10 @@ const AsadoPage = () => {
                       placeholder="Escribe tu número de teléfono"
                       className={step > 3 ? "bg-gray-50" : ""}
                       readOnly={step > 3}
+                      onBlur={() => {
+                        if (formData.phone && step === 3) nextStep();
+                      }}
                     />
-                    
-                    {step === 3 && (
-                      <Button 
-                        onClick={nextStep}
-                        className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
-                      >
-                        Continuar
-                      </Button>
-                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -255,16 +259,10 @@ const AsadoPage = () => {
                       placeholder="Escribe tu correo electrónico"
                       className={step > 4 ? "bg-gray-50" : ""}
                       readOnly={step > 4}
+                      onBlur={() => {
+                        if (formData.email && step === 4) nextStep();
+                      }}
                     />
-                    
-                    {step === 4 && (
-                      <Button 
-                        onClick={nextStep}
-                        className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
-                      >
-                        Continuar
-                      </Button>
-                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -287,14 +285,12 @@ const AsadoPage = () => {
                       readOnly={step > 5}
                     />
                     
-                    {step === 5 && (
-                      <Button 
-                        onClick={nextStep}
-                        className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
-                      >
-                        Continuar
-                      </Button>
-                    )}
+                    <Button 
+                      onClick={nextStep}
+                      className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
+                    >
+                      Continuar
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -329,14 +325,12 @@ const AsadoPage = () => {
                       </div>
                     </RadioGroup>
                     
-                    {step === 6 && (
-                      <Button 
-                        onClick={nextStep}
-                        className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
-                      >
-                        Continuar
-                      </Button>
-                    )}
+                    <Button 
+                      onClick={nextStep}
+                      className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
+                    >
+                      Continuar
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -359,14 +353,12 @@ const AsadoPage = () => {
                       readOnly={step > 7}
                     />
                     
-                    {step === 7 && (
-                      <Button 
-                        onClick={nextStep}
-                        className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
-                      >
-                        Continuar
-                      </Button>
-                    )}
+                    <Button 
+                      onClick={nextStep}
+                      className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
+                    >
+                      Continuar
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

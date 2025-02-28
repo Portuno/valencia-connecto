@@ -36,18 +36,21 @@ const AsadoPage = () => {
     setIsSubmitting(true);
 
     try {
+      // Tipamos explícitamente los datos para evitar errores con el tipo diet_preference
+      const insertData = {
+        full_name: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        allergies: formData.allergies || null,
+        diet_preference: formData.dietPreference as any, // Usamos any para evitar problemas con el tipo
+        guests: formData.guests || null,
+        help_organize: formData.helpOrganize,
+        additional_info: formData.additionalInfo || null
+      };
+
       const { error } = await supabase
         .from('asado_registrations')
-        .insert({
-          full_name: formData.fullName,
-          phone: formData.phone,
-          email: formData.email,
-          allergies: formData.allergies || null,
-          diet_preference: formData.dietPreference,
-          guests: formData.guests || null,
-          help_organize: formData.helpOrganize,
-          additional_info: formData.additionalInfo || null
-        });
+        .insert(insertData);
 
       if (error) throw error;
 

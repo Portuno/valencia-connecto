@@ -9,6 +9,45 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      asado_registrations: {
+        Row: {
+          additional_info: string | null
+          allergies: string | null
+          created_at: string
+          diet_preference: Database["public"]["Enums"]["diet_preference"]
+          email: string
+          full_name: string
+          guests: string | null
+          help_organize: boolean
+          id: string
+          phone: string
+        }
+        Insert: {
+          additional_info?: string | null
+          allergies?: string | null
+          created_at?: string
+          diet_preference: Database["public"]["Enums"]["diet_preference"]
+          email: string
+          full_name: string
+          guests?: string | null
+          help_organize?: boolean
+          id?: string
+          phone: string
+        }
+        Update: {
+          additional_info?: string | null
+          allergies?: string | null
+          created_at?: string
+          diet_preference?: Database["public"]["Enums"]["diet_preference"]
+          email?: string
+          full_name?: string
+          guests?: string | null
+          help_organize?: boolean
+          id?: string
+          phone?: string
+        }
+        Relationships: []
+      }
       events: {
         Row: {
           created_at: string
@@ -289,6 +328,7 @@ export type Database = {
     Enums: {
       app_role: "normal" | "moderator" | "admin"
       contact_method: "email" | "whatsapp" | "telegram" | "other"
+      diet_preference: "carne" | "vegetariana" | "vegana"
     }
     CompositeTypes: {
       [_ in never]: never

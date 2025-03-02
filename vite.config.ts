@@ -22,4 +22,9 @@ export default defineConfig(({ mode }) => ({
   },
   // Add base path configuration for Netlify
   base: "/",
+  // Set build options for improved compatibility
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+  },
 }));

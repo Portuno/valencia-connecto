@@ -1,7 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Flame } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -32,13 +31,14 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); navigate('/asado'); }} 
-              className="text-gray-600 hover:text-valencia-orange transition-colors"
+            <Button 
+              variant="ghost"
+              onClick={() => navigate('/asado')} 
+              className="text-gray-600 hover:text-valencia-orange transition-colors flex items-center gap-1"
             >
-              🔥 Asado
-            </a>
+              <Flame className="h-4 w-4 text-valencia-orange" />
+              <span className="font-medium">Asado</span>
+            </Button>
             
             <NavigationMenu>
               <NavigationMenuList>
@@ -140,13 +140,15 @@ export function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-4">
-              <a 
-                href="#" 
-                onClick={(e) => { e.preventDefault(); navigate('/asado'); setIsMenuOpen(false); }}
-                className="text-gray-600 hover:text-valencia-orange transition-colors"
+              <Button 
+                variant="ghost"
+                onClick={() => { navigate('/asado'); setIsMenuOpen(false); }}
+                className="justify-start text-gray-600 hover:text-valencia-orange transition-colors flex items-center gap-1"
               >
-                🔥 Asado
-              </a>
+                <Flame className="h-4 w-4 text-valencia-orange" />
+                <span className="font-medium">Asado</span>
+              </Button>
+              
               <div className="space-y-2 pl-4">
                 <p className="text-sm font-semibold text-gray-500">Eventos</p>
                 <a 

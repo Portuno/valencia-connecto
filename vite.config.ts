@@ -26,5 +26,20 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    // Ensure compatibility with Node.js environment
+    target: "esnext",
+    // Add Netlify-specific build optimizations
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: [
+            'react', 
+            'react-dom', 
+            'react-router-dom',
+            '@tanstack/react-query'
+          ],
+        },
+      },
+    },
   },
 }));
